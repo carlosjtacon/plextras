@@ -122,9 +122,10 @@ def youtube_download(path, search, max_results):
 	with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 	    ydl.download(videos)
 
-youtube_download(file_folder + '/Behind The Scenes', film_name + "behind the scenes", 4)
+youtube_download(file_folder + '/Behind The Scenes', film_name + "behind the scenes", 3)
+youtube_download(file_folder + '/Behind The Scenes', film_name + "breakdown", 2)
 youtube_download(file_folder + '/Interviews', film_name + "interview", 4)
-youtube_download(file_folder + '/Scenes', film_name + "scene", 3)
+youtube_download(file_folder + '/Scenes', film_name + "scene", 2)
 youtube_download(file_folder + '/Scenes', film_name + "anatomy of a scene", 1)
 youtube_download(file_folder + '/Trailers', film_name + "trailer", 1)
 
