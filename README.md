@@ -7,4 +7,5 @@ Usage: sudo python plextras.py "[film name]" [file / folder path]
 
 **Dependencies:**
 
-pip install --upgrade google-api-python-client
+sudo pip install --upgrade google-api-python-client
+sudo pip install --upgrade youtube-dl
