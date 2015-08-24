@@ -3,9 +3,9 @@ Plextras CLI
 
 Extra content download from YouTube using the Plex folder scheme.
 
-Usage: sudo python plextras.py "[film name]" [file / folder path]
+__Usage:__ sudo python plextras.py "[film name]" [file / folder path]
 
-**Dependencies:**
+__Dependencies:__
 
-sudo pip install --upgrade google-api-python-client
-sudo pip install --upgrade youtube-dl
+- sudo pip install --upgrade google-api-python-client
+- sudo pip install --upgrade youtube-dl
