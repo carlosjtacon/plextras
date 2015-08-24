@@ -2,6 +2,50 @@ from __future__ import unicode_literals
 import youtube_dl
 import sys, os, shutil
 
+# =====================================================================================================
+# Confirmation Prompt: @ http://code.activestate.com/recipes/541096-prompt-the-user-for-confirmation/
+# =====================================================================================================
+
+def confirm(prompt=None, resp=True):
+    """prompts for yes or no response from the user. Returns True for yes and
+    False for no.
+
+    'resp' should be set to the default value assumed by the caller when
+    user simply types ENTER.
+
+    >>> confirm(prompt='Create Directory?', resp=True)
+    Create Directory? [y]|n: 
+    True
+    >>> confirm(prompt='Create Directory?', resp=False)
+    Create Directory? [n]|y: 
+    False
+    >>> confirm(prompt='Create Directory?', resp=False)
+    Create Directory? [n]|y: y
+    True
+
+    """
+    
+    if prompt is None:
+        prompt = 'Download Extra?'
+
+    if resp:
+        prompt = '%s [%s]|%s: ' % (prompt, 'y', 'n')
+    else:
+        prompt = '%s [%s]|%s: ' % (prompt, 'n', 'y')
+        
+    while True:
+        ans = raw_input(prompt)
+        if not ans:
+            return resp
+        if ans not in ['y', 'Y', 'n', 'N']:
+            print 'please enter y or n.'
+            continue
+        if ans == 'y' or ans == 'Y':
+            return True
+        if ans == 'n' or ans == 'N':
+            return False
+
+
 # ===============================================================
 # Youtube Stuff
 # ===============================================================
@@ -26,8 +70,10 @@ def youtube_search(query, max_results):
 	videos = []
 	for search_result in search_response.get("items", []):
 		if search_result["id"]["kind"] == "youtube#video":
-		  videos.append(("%s" % (search_result["id"]["videoId"])).encode('utf-8'))
-		  # videos.append(("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["videoId"])).encode('utf-8'))
+			print ("%s (%s)" % (search_result["snippet"]["title"], search_result["snippet"]["channelTitle"])).encode('utf-8')
+			if confirm():
+				videos.append(("%s" % (search_result["id"]["videoId"])).encode('utf-8'))
+				# videos.append(("%s (%s)" % (search_result["snippet"]["title"], search_result["id"]["videoId"])).encode('utf-8'))
 
 	# print "Videos:\n", "\n".join(videos), "\n"
 	return videos
@@ -76,9 +122,9 @@ def youtube_download(path, search, max_results):
 	with youtube_dl.YoutubeDL(ydl_opts) as ydl:
 	    ydl.download(videos)
 
-youtube_download(file_folder + '/Behind The Scenes', film_name + "behind the scenes", 1)
-youtube_download(file_folder + '/Interviews', film_name + "interview", 3)
-youtube_download(file_folder + '/Scenes', film_name + "scene", 1)
+youtube_download(file_folder + '/Behind The Scenes', film_name + "behind the scenes", 4)
+youtube_download(file_folder + '/Interviews', film_name + "interview", 4)
+youtube_download(file_folder + '/Scenes', film_name + "scene", 3)
 youtube_download(file_folder + '/Scenes', film_name + "anatomy of a scene", 1)
 youtube_download(file_folder + '/Trailers', film_name + "trailer", 1)
 
