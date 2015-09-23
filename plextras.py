@@ -92,10 +92,10 @@ file_folder = sys.argv[2]
 
 # Making a parent folder for the file
 if os.path.isfile(file_folder):
-	file_folder_new = file_folder + "_dir"
+	file_folder_new = os.path.splitext(file_folder)[0]
 	os.mkdir(file_folder_new, 0755)
 	shutil.move(file_folder, file_folder_new + "/" + os.path.basename(file_folder))
-	os.rename(file_folder_new, file_folder)
+	file_folder = file_folder_new
 
 # Plex folder scheme
 if not os.path.exists(file_folder + "/Behind The Scenes"):
